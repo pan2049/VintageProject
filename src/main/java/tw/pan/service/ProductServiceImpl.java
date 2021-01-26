@@ -1,6 +1,5 @@
 package tw.pan.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +22,7 @@ public class ProductServiceImpl implements ProductService {
 	
 	@Override
 	public String getProductAll() throws Exception{
-		List<Product> pList = pSDao.findAll();
+		List<Product> pList = pSDao.selectAll();
 		System.out.println("go");
 		String pJson = objectMapper.writeValueAsString(pList);
 		System.out.println(pJson);
