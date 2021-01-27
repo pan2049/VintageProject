@@ -1,5 +1,7 @@
 package tw.pan.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.databind.util.JSONPObject;
+
+import tw.pan.model.Product;
 import tw.pan.service.ProductService;
 import tw.pan.valueObject.ProductReq;
 import tw.pan.valueObject.ProductResp;
@@ -26,9 +31,10 @@ public class ProductSelectController {
 		return pService.getProductAll();
 	}
 	
-	@PostMapping(value="/productSelectByMain",produces = "application/json;charset=utf-8")
+	@PostMapping(value="/productSelectByMain")
 	@ResponseBody
-	public String shopGridSelectByMain(@RequestBody ProductReq req) throws Exception {
-		return pService.getProductByMain(req); 
+	public String shopGridSelectByMain(@RequestBody ProductResp Main) throws Exception {
+		String main = Main.getP_main();
+		return pService.getProductByMain(main); 
 	}
 }

@@ -14,9 +14,9 @@ public interface ProductSelectDao extends JpaRepository<Product,Integer> {
 	List<Product> selectAll();
 		
 	//查詢大項
-	@Query(value="select * from Product where p_main = ?1",nativeQuery = true)
-	List<Product> selectMain(String p_main);
-		
+//	@Query(value="select u from Product u where u.p_main = ?1")
+//	public List<Product> findByMain(String p_main);
+	
 	//查詢大項 + 小項
 	@Query(value="select * from Product where p_main = ?1 and p_detail = ?2",nativeQuery = true)
 	List<Product> selectMainAndDetail(String p_main,String p_detail);

@@ -59,30 +59,21 @@
     		
     		$("#toys").click(function(e){
     			e.preventDefault();
+    			var str = {"p_main":"test"};
     			$.ajax({
     				url:"productSelectByMain",
         			type:"POST",
         			dataType:"json",
-        			data:{"Main":"test"},
+        			data:JSON.stringify(str),
         			contentType:"application/json; charset=utf-8",
         			success:function(response){
         				console.log(response);
         				$.each(response,function(i,v){
-        					$(".container #testMainRow #test1 #testRow").append(
-        					`<div class="col-lg-4 col-md-6 col-sm-6">
-                                <div class="product__item">
-                                    <div class="product__item__pic set-bg" data-setbg="img/product/${v.p_img}">
-                                        <ul class="product__item__pic__hover">
-                                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="product__item__text">
-                                        <h6><a href="#">${v.p_name}</a></h6>
-                                        <h5>${v.price}</h5>
-                                    </div>
-                                </div>
+        					$("#lazyRow").append(
+        					`<div>
+                                <h1>${v.p_id}</h1><br>
+                                <h2>${v.p_name}</h2><br>
+                                <h3>${v.p_main}<h3>
                             </div>`
         					);
         				})
@@ -493,7 +484,9 @@
                         </div>
                         <div class="row">
                             <div class="product__discount__slider owl-carousel">
-                            123456
+                            <div id="lazyRow">
+                            
+                            </div>
                             </div>
                         </div>
                     </div>

@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import aj.org.objectweb.asm.Type;
 import tw.pan.dao.ProductSelectDao;
+import tw.pan.dao.ProductSelectDao2;
 import tw.pan.model.Product;
 import tw.pan.valueObject.ProductReq;
 import tw.pan.valueObject.ProductResp;
@@ -17,6 +19,8 @@ public class ProductServiceImpl implements ProductService {
 
 	@Autowired
 	private ProductSelectDao pSDao;
+	@Autowired
+	private ProductSelectDao2 pSDao2;
 	@Autowired
 	private ObjectMapper objectMapper ;
 	
@@ -31,11 +35,13 @@ public class ProductServiceImpl implements ProductService {
 	}
 	
 	@Override
-	public String getProductByMain(ProductReq req) throws Exception{
-		 List<Product> pList = pSDao.selectMain(req.getP_main());
-		 System.out.println(pList);
-		 String result = objectMapper.writeValueAsString(pList);
-		 return result;
+	public String getProductByMain(String p_main) throws Exception{
+		System.out.println(p_main);
+		 List<Product> pList = pSDao2.findByMain(p_main);
+		 String pJson = objectMapper.writeValueAsString(pList);
+		 System.out.println(pJson);
+		 String response = pJson;
+		 return response;
 	}
 	
 	@Override
