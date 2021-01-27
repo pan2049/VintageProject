@@ -31,12 +31,11 @@ public class ProductServiceImpl implements ProductService {
 	}
 	
 	@Override
-	public String getProductByMain(String p_main) throws Exception{
-		 List<Product> pList = pSDao.selectMain(p_main);
-		 String pJson = objectMapper.writeValueAsString(pList);
-		 System.out.println(pJson);
-		 String response = pJson;
-		 return response;
+	public String getProductByMain(ProductReq req) throws Exception{
+		 List<Product> pList = pSDao.selectMain(req.getP_main());
+		 System.out.println(pList);
+		 String result = objectMapper.writeValueAsString(pList);
+		 return result;
 	}
 	
 	@Override
@@ -58,7 +57,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 	
 	//ProductReq 轉 ProductEntity
-	private Product setProductEntity(ProductReq req) {
+	public Product setProductEntity(ProductReq req) {
 		Product pBean = new Product();
 		
 		pBean.setP_name(req.getP_name());
@@ -75,7 +74,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 	
 	// ProductEntity 轉 ProductResponse
-	private ProductResp setProductResp(Product pBean) {
+	public ProductResp setProductResp(Product pBean) {
 		ProductResp pResp = new ProductResp();
 		
 		pResp.setP_name(pBean.getP_name());

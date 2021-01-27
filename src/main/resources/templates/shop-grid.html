@@ -57,6 +57,41 @@
     			}
     		});
     		
+    		$("#toys").click(function(e){
+    			e.preventDefault();
+    			$.ajax({
+    				url:"productSelectByMain",
+        			type:"POST",
+        			dataType:"json",
+        			data:{"Main":"test"},
+        			contentType:"application/json; charset=utf-8",
+        			success:function(response){
+        				console.log(response);
+        				$.each(response,function(i,v){
+        					$(".container #testMainRow #test1 #testRow").append(
+        					`<div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="product__item">
+                                    <div class="product__item__pic set-bg" data-setbg="img/product/${v.p_img}">
+                                        <ul class="product__item__pic__hover">
+                                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="product__item__text">
+                                        <h6><a href="#">${v.p_name}</a></h6>
+                                        <h5>${v.price}</h5>
+                                    </div>
+                                </div>
+                            </div>`
+        					);
+        				})
+        			},
+        			error:function(msg){
+        				alert("ajax異常:"+msg);
+        			}
+    			});
+    		});
     		
     		
     	});
@@ -220,8 +255,8 @@
                             <span>All departments</span>
                         </div>
                         <ul>
-                            <li><a href="#">Fresh Meat</a></li>
-                            <li><a href="#">Vegetables</a></li>
+                            <li><a href="#" id="toys">玩具</a></li>
+                            <li><a href="#" id="accessories">飾品</a></li>
                             <li><a href="#">Fruit & Nut Gifts</a></li>
                             <li><a href="#">Fresh Berries</a></li>
                             <li><a href="#">Ocean Foods</a></li>

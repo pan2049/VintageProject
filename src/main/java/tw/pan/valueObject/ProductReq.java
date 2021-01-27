@@ -4,6 +4,10 @@ package tw.pan.valueObject;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ProductReq {
+	
+	@JsonProperty(value="p_id")
+	private Integer p_id;
+	
 	@JsonProperty(value="p_name")
 	private String p_name;
 	
@@ -30,6 +34,14 @@ public class ProductReq {
 	
 	@JsonProperty(value="user_acc")
 	private String user_acc;
+
+	public Integer getP_id() {
+		return p_id;
+	}
+
+	public void setP_id(Integer p_id) {
+		this.p_id = p_id;
+	}
 
 	public String getP_name() {
 		return p_name;
